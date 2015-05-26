@@ -1,0 +1,795 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document><Folder><name>OGRGeoJSON</name>
+<Schema name="OGRGeoJSON" id="OGRGeoJSON">
+	<SimpleField name="Name" type="string"></SimpleField>
+	<SimpleField name="Description" type="string"></SimpleField>
+	<SimpleField name="_id" type="int"></SimpleField>
+</Schema>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>17.290001,-30.200001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">1</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>32.18,-27.389999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">2</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.82,-33.77</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">3</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>19.42,-33.66</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">4</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>17.860001,-32.830002</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>20.870001,-33.200001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>18.33,-32.040001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>21.26,-28.41</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">8</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>29.280001,-24.98</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">9</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>23.33,-34.09</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>28.33,-28.25</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>27.85,-31.34</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">12</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>25.190001,-29.450001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">13</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>30.379999,-23.09</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">14</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>19.879999,-33.790001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">15</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>30.27,-29.540001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">16</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>18.41,-33.939999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">17</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.049999,-24.35</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">18</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>19.02,-34.139999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">19</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>28.0,-26.15</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">20</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>19.9,-34.150002</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">21</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>26.5,-33.290001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">22</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>18.16,-32.970001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">23</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>18.120001,-33.200001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">24</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.969999,-31.190001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">25</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>20.34,-28.6</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">26</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.77,-28.799999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">27</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>29.35,-29.790001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">28</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>19.76,-31.48</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">29</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>17.620001,-28.77</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">30</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>18.969999,-33.720001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">31</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>18.32,-34.150002</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">32</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>18.98,-33.009998</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">33</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>26.17,-26.129999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">34</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>28.43,-26.200001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">35</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>19.389999,-29.129999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">36</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>29.950001,-29.93</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">37</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>30.0,-29.209999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">38</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>20.66,-32.400002</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">39</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>30.950001,-29.969999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">40</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>27.23,-25.65</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">41</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.540001,-32.189999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">42</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>19.01,-33.650002</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">43</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>22.58,-32.360001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">44</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>32.419998,-28.200001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">45</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>26.879999,-30.84</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">46</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>28.950001,-28.690001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">47</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>21.280001,-33.5</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">48</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>29.77,-28.57</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">49</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>23.91,-34.029999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">50</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>29.17,-27.43</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">51</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.4,-29.15</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">52</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>21.51,-31.92</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">53</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>26.879999,-31.92</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">54</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>25.719999,-33.049999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">55</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>16.540001,-28.57</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">56</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.42,-29.82</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">57</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>25.540001,-25.809999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">58</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.42,-28.299999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">59</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.629999,-26.950001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">60</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>26.620001,-26.9</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">61</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>28.18,-25.74</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">62</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>28.67,-31.530001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">63</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>18.719999,-33.470001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">64</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>30.4,-29.65</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">65</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>28.23,-26.15</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">66</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>27.83,-33.029999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">67</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>30.33,-30.85</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">68</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>18.49,-34.349998</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">69</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>18.48,-33.610001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">70</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>26.67,-27.99</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">71</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>26.879999,-33.560001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">72</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>27.700001,-23.68</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">73</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>29.059999,-27.959999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">74</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>23.48,-33.299999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">75</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>27.879999,-26.129999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">76</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>23.860001,-33.84</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">77</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>28.209999,-25.91</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">78</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>25.5,-30.620001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">79</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.700001,-28.950001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">80</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>29.52,-29.27</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">81</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>26.809999,-31.120001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">82</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>20.059999,-34.799999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">83</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>25.629999,-32.169998</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">84</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>26.18,-29.120001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">85</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>26.299999,-29.1</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">86</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>26.02,-26.82</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">87</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>28.200001,-25.77</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">88</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.0,-30.67</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">89</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>18.85,-34.139999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">90</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>29.459999,-26.459999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">91</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>18.5,-31.67</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">92</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>19.219999,-34.43</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">93</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>25.620001,-27.65</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">94</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.77,-27.549999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">95</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>28.379999,-23.6</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">96</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.219999,-28.370001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">97</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>28.33,-24.9</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">98</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>18.889999,-32.18</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">99</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>26.629999,-32.790001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">100</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.049999,-29.700001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">101</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>21.4,-34.369999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">102</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>18.370001,-33.799999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">103</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>29.450001,-23.870001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">104</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>19.43,-32.959999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">105</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>30.6,-29.08</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">106</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>16.870001,-29.25</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">107</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>26.700001,-31.370001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">108</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>23.09,-34.060001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">109</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>26.870001,-29.9</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">110</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>27.950001,-26.57</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">111</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>29.98,-26.5</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">112</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>30.26,-30.75</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">113</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>20.610001,-26.469999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">114</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>17.889999,-29.67</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">115</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>21.82,-30.35</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">116</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>22.379999,-34.02</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">117</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>32.080002,-28.73</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">118</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>28.5,-27.27</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">119</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>20.48,-30.459999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">120</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>25.440001,-33.709999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">121</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>30.23,-31.07</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">122</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.049999,-29.77</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">123</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>22.73,-29.67</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">124</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>27.23,-27.629999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">125</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>18.6,-33.970001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">126</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>20.01,-34.830002</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">127</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>18.43,-33.990002</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">128</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>25.610001,-33.98</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">129</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>18.6,-33.970001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#OGRGeoJSON">
+		<SimpleData name="_id">130</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>30.4,-29.629999</coordinates></Point>
+  </Placemark>
+</Folder></Document></kml>
