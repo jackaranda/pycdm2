@@ -155,7 +155,7 @@ class netCDF4Dataset(Dataset):
 				continue
 
 			dims = variable.dimensions
-			datatype = variable.data.dtype
+			datatype = variable.data[:].dtype
 
 			if datatype == type(object):
 				datatype = type('str')

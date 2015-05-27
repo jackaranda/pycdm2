@@ -131,7 +131,7 @@ class clarisDataset(Dataset):
 		dimensions['time'] = Dimension('time', len(times_list))
 		#dimensions['latitude'] = Dimension('latitude', len(ids))
 		#dimensions['longitude'] = Dimension('longitude', len(ids))
-		dimensions['feature'] = Dimension('id', len(ids))
+		dimensions['id'] = Dimension('id', len(ids))
 
 		# Create group dimension if we have groups
 		if max_groups > 1:
@@ -153,10 +153,10 @@ class clarisDataset(Dataset):
 		# Create the variables
 		variables = {}
 		variables['time'] = clarisVariable('time', self.root, times, dimensions=[u'time'], attributes={'units':time_units})
-		variables['id'] = clarisVariable('id', self.root, numpy.array(ids), dimensions=[u'feature'])
-		variables['latitude'] = clarisVariable('latitude', self.root, numpy.copy(latlonelev), dimensions=[u'feature'], attributes={'units':'degrees north'})
-		variables['longitude'] = clarisVariable('longitude', self.root, numpy.copy(latlonelev), dimensions=[u'feature'], attributes={'units':'degrees east'})
-		variables['elevation'] = clarisVariable('elevation', self.root, numpy.copy(latlonelev), dimensions=[u'feature'], attributes={'units':'m'})
+		variables['id'] = clarisVariable('id', self.root, numpy.array(ids), dimensions=[u'id'], attributes={'cf_role':'timeseries_id'})
+		variables['latitude'] = clarisVariable('latitude', self.root, numpy.copy(latlonelev), dimensions=[u'id'], attributes={'units':'degrees north'})
+		variables['longitude'] = clarisVariable('longitude', self.root, numpy.copy(latlonelev), dimensions=[u'id'], attributes={'units':'degrees east'})
+		variables['elevation'] = clarisVariable('elevation', self.root, numpy.copy(latlonelev), dimensions=[u'id'], attributes={'units':'m'})
 
 		# Create the data variables
 		for varname in grouped[ids[0]]['variables'].keys():
@@ -297,18 +297,20 @@ def readsingle(path):
 	# Try and figure out which are/is the date column(s)
 	# first we try a 3 column date because this will fail for 1 column dates
 	date_column = None
-	for col in range(0, len(header_fields) - 3):
-		
-		s = file_data[1][col:col+3]
-		merged = "{}-{}-{}".format(s[0], s[1], s[2])
-		try:
-			test = parser.parse(merged)
-		except:
-			pass
-		else:
-			date_column = slice(col,col+3)
-			header_fields[date_column] = ['year', 'month', 'day']
-			break
+	if len(file_data[1]) > 5:
+		for col in range(1, len(header_fields) - 3):
+			
+			s = file_data[1][col:col+3]
+			merged = "{}-{}-{}".format(s[0], s[1], s[2])
+			try:
+				test = parser.parse(merged)
+			except:
+				pass
+			else:
+				#print "managed to parse ", merged
+				date_column = slice(col,col+3)
+				header_fields[date_column] = ['year', 'month', 'day']
+				break
 
 	# Second we try a one column date because this wouldn't fail for 3 column dates
 	if not date_column:
@@ -323,6 +325,7 @@ def readsingle(path):
 
 	# If still no success then we have a problem
 	if not date_column:
+		print "Cannot determine date column"
 		raise IOError("Cannot determine date column")
 
 	#print "header = {}".format(header)
@@ -344,6 +347,8 @@ def readsingle(path):
 				times_list.append(parser.parse(row[date_column], default=default_date))
 
 	except:
+		print row[date_column]
+		print "Cannot parse dates"
 		raise IOError("Cannot parse dates, problem on row {}".format(row))
 
 	print "first date = {}".format(times_list[0])
