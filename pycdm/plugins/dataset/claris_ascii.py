@@ -34,6 +34,7 @@ class clarisVariable(Variable):
 		"""
 		Creates a new clarisVariable instance
 		"""
+		#print "clarisVariable.__init__ :", name, group, data.shape, kwargs
 		super(clarisVariable, self).__init__(name, group=group, **kwargs)
 		self.data = data
 	
@@ -153,7 +154,7 @@ class clarisDataset(Dataset):
 		# Create the variables
 		variables = {}
 		variables['time'] = clarisVariable('time', self.root, times, dimensions=[u'time'], attributes={'units':time_units})
-		variables['id'] = clarisVariable('id', self.root, numpy.array(ids), dimensions=[u'id'], attributes={'cf_role':'timeseries_id'})
+		variables['station_id'] = clarisVariable('station_id', self.root, numpy.array(ids), dimensions=[u'id'], attributes={'cf_role':'timeseries_id'})
 		variables['latitude'] = clarisVariable('latitude', self.root, numpy.copy(latlonelev), dimensions=[u'id'], attributes={'units':'degrees north'})
 		variables['longitude'] = clarisVariable('longitude', self.root, numpy.copy(latlonelev), dimensions=[u'id'], attributes={'units':'degrees east'})
 		variables['elevation'] = clarisVariable('elevation', self.root, numpy.copy(latlonelev), dimensions=[u'id'], attributes={'units':'m'})
@@ -164,10 +165,10 @@ class clarisDataset(Dataset):
 			# Create placeholder array
 			if max_groups > 1:
 				tmp = numpy.empty((len(times_list), max_groups, len(ids)), dtype=numpy.float32)
-				dim_list = [u'time', u'group', u'feature']
+				dim_list = [u'time', u'group', u'id']
 			else:
 				tmp = numpy.empty((len(times_list), len(ids)), dtype=numpy.float32)
-				dim_list = [u'time', u'feature']
+				dim_list = [u'time', u'id']
 
 			tmp[:] = 1e10
 
@@ -186,13 +187,13 @@ class clarisDataset(Dataset):
 				#tmp[:,column] = s['variables'][varname]
 				column += 1
 			
-			print "variable[{}].shape {}".format(varname, tmp.shape)
+			#print "variable[{}].shape {}".format(varname, tmp.shape)
 			#print numpy.ma.masked_greater(tmp, 1e9)
 
 			attributes = {"coordinates": "latitude longitude"}
 
 			variables[varname] = clarisVariable(varname, self.root, numpy.ma.masked_greater(tmp, 1e9), dimensions=dim_list, attributes=attributes)
-			print variables[varname].shape
+			#print variables[varname].shape
 		# Assign the variables to the root group and we are done!
 		self.root.variables = variables
 
@@ -384,5 +385,5 @@ def readsingle(path):
 			#print data.shape
 			variables[header_fields[col]] = data
 
-	print "returning ", variables.keys()
+	#print "returning ", variables.keys()
 	return {'id':id, 'times':times_list, 'variables':variables}
