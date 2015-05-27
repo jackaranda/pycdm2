@@ -115,7 +115,7 @@ class netCDF4Dataset(Dataset):
 		self.root.variables = variables
 
 	@classmethod
-	def copy(cls, dataset, filename, include=None, exclude=None):
+	def copy(cls, dataset, filename, include=None, exclude=None, start=None, end=None):
 		"""
 		The copy method takes an existing pycdm.Dataset instance and (a) writes it to a NetCDF 
 		before (b) returning a NetCDF4Dataset instance reflecting the new file
@@ -146,6 +146,27 @@ class netCDF4Dataset(Dataset):
 
 			print name, variable
 
+			field = Field(variable)
+
+			# Sort out time subsetting
+			realtimes = field.realtimes
+
+			if type(realtimes) == numpy.ndarray:
+				if start == None or start < realtimes[0]:
+					start = realtimes[0]
+				if end == None or end > realtimes[-1]:
+					end = realtimes[-1]
+
+				time_select = numpy.where(numpy.logical_and(realtimes >= start,realtimes <= end))[0]
+				#print time_select
+
+				data_slice = [slice(None)]*len(variable.shape)
+				data_slice[field.time_dim] = slice(time_select[0], time_select[-1])
+				data_slice = tuple(data_slice)
+				print data_slice
+
+				variable.group.dimensions['time'] = Dimension('time', len(time_select))
+
 			if include and ((name not in include) and (name not in coordinates_variables)):
 				print "skipping because of include"
 				continue
@@ -155,7 +176,7 @@ class netCDF4Dataset(Dataset):
 				continue
 
 			dims = variable.dimensions
-			datatype = variable.data[:].dtype
+			datatype = variable.data.dtype
 
 			if datatype == type(object):
 				datatype = type('str')
@@ -179,6 +200,7 @@ class netCDF4Dataset(Dataset):
 			print "Assigning variable"
 			#print outfile.variables[name][:].shape
 			#print variable[:].shape
+
 			outfile.variables[name][:] = variable[:]
 
 		outfile.close()

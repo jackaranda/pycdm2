@@ -25,6 +25,12 @@ import datetime
 
 default_date = datetime.datetime(1900,1,1,12)
 
+standard_attributes = {'pr':{"coordinates": "latitude longitude", "standard_name":"precipitation", "units":"mm"},\
+					    'tasmax':{"coordinates": "latitude longitude", "standard_name":"maximum temperature", "units":"C"},\
+					    'tasmin':{"coordinates": "latitude longitude", "standard_name":"minimum temperature", "units":"C"}}
+
+variable_table = {'pr':'pr', 'tmax':'tasmax', 'tmin':'tasmin'}
+
 class clarisVariable(Variable):
 	"""
 	A subclass of the CDM Variable class that implements Claris variable access
@@ -190,7 +196,7 @@ class clarisDataset(Dataset):
 			#print "variable[{}].shape {}".format(varname, tmp.shape)
 			#print numpy.ma.masked_greater(tmp, 1e9)
 
-			attributes = {"coordinates": "latitude longitude"}
+			attributes = standard_attributes[varname]
 
 			variables[varname] = clarisVariable(varname, self.root, numpy.ma.masked_greater(tmp, 1e9), dimensions=dim_list, attributes=attributes)
 			#print variables[varname].shape
@@ -383,7 +389,7 @@ def readsingle(path):
 					raise IOError("Can't convert values to float or string!")
 
 			#print data.shape
-			variables[header_fields[col]] = data
+			variables[variable_table[header_fields[col]]] = data
 
 	#print "returning ", variables.keys()
 	return {'id':id, 'times':times_list, 'variables':variables}
