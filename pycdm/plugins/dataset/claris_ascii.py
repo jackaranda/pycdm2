@@ -154,9 +154,9 @@ class clarisDataset(Dataset):
 		variables = {}
 		variables['time'] = clarisVariable('time', self.root, times, dimensions=[u'time'], attributes={'units':time_units})
 		variables['id'] = clarisVariable('id', self.root, numpy.array(ids), dimensions=[u'feature'])
-		variables['latitude'] = clarisVariable('latitude', self.root, numpy.copy(latlonelev), dimensions=[u'feature'])
-		variables['longitude'] = clarisVariable('longitude', self.root, numpy.copy(latlonelev), dimensions=[u'feature'])
-		variables['elevation'] = clarisVariable('elevation', self.root, numpy.copy(latlonelev), dimensions=[u'feature'])
+		variables['latitude'] = clarisVariable('latitude', self.root, numpy.copy(latlonelev), dimensions=[u'feature'], attributes={'units':'degrees north'})
+		variables['longitude'] = clarisVariable('longitude', self.root, numpy.copy(latlonelev), dimensions=[u'feature'], attributes={'units':'degrees east'})
+		variables['elevation'] = clarisVariable('elevation', self.root, numpy.copy(latlonelev), dimensions=[u'feature'], attributes={'units':'m'})
 
 		# Create the data variables
 		for varname in grouped[ids[0]]['variables'].keys():
