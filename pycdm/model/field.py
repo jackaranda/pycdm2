@@ -521,9 +521,9 @@ class Field(object):
 		if self.time_variable:
 			return netCDF4.num2date(self.time_variable[:], self.time_variable.get_attribute('units'))
 			
-	def time_slices(self, start={}, length='1 month'):
+	def time_slices(self, start={}, length='1 month', after=None, before=None):
 		
-		return time_slices(self.times, self.time_variable.get_attribute('units'), start, length)
+		return time_slices(self.times, self.time_variable.get_attribute('units'), start, length, after=after, before=before)
 		
 	def time_aggregation(self, func, start={}, length='1 month', mask_less=numpy.nan, mask_greater=numpy.nan):
 		

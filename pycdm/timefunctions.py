@@ -22,7 +22,7 @@ def days_in_month(year, month, cal='standard'):
 		if calendar.isleap(year) and month == 2:
 			return 28
 
-def time_slices(times, time_units, start={}, length='1 month'):
+def time_slices(times, time_units, origin={}, length='1 month', after=None, before=None):
 	
 	length_parts = length.split()
 	length_val = int(length_parts[0])
@@ -30,12 +30,19 @@ def time_slices(times, time_units, start={}, length='1 month'):
 
 	print "time_slices ", length_val, length_units
 
-	
 	real_times = netCDF4.num2date(times, time_units)
-	#print real_times
+
+	# Set before and after to start and end times if not specified
+	if not after:
+		after = real_times[0]
+	if not before:
+		before = real_times[-1]
+
+	#print "time_slices, after {} and before {}".format(after, before)
+
 	all_years = np.arange(real_times[0].year, real_times[-1].year+1)
 	
-	for s in start:
+	for s in origin:
 		if 'year' not in s.keys():
 			years = all_years
 			print years
@@ -80,7 +87,7 @@ def time_slices(times, time_units, start={}, length='1 month'):
 				
 					this_start = datetime.datetime(year, month, day, hour)
 					
-					# Calculat end date based on length units and value
+					# Calculate end date based on length units and value
 					if length_units == 'year':
 						end_year = year + length_val
 					else:
@@ -112,18 +119,17 @@ def time_slices(times, time_units, start={}, length='1 month'):
 					#end_day = min(days_in_month(end_year, end_month), day)
 					this_end = datetime.datetime(end_year, end_month, end_day, hour)
 					
-					#print this_start, this_end
+					# Check if are completely before or after the time range
+					if this_end < after or this_start >= before:
+						print this_start, after
+						print this_end, before
+						continue
 
 					start_value = netCDF4.date2num(this_start, time_units)
 					end_value = netCDF4.date2num(this_end, time_units)
 					
-					#print start_value, end_value
-					
-					# Check if are completely before or after the time range
-					if end_value < times[0] or start_value > times[-1]:
-						continue
-
-					# Crop start_value and end_value to the time range
+					# Crop origin_value and end_value to the time range
+					#if start_value <= times[0]:
 					if start_value <= times[0]:
 						start_index = 0
 					else:
@@ -134,11 +140,11 @@ def time_slices(times, time_units, start={}, length='1 month'):
 					else:
 						end_index = np.where(times <= end_value)[0][-1]
 					
-					#print netCDF4.date2num(this_start, time_units), netCDF4.date2num(this_end, time_units)
-					#print start_index, end_index
-					print "from file: ", netCDF4.num2date(times[start_index], time_units), netCDF4.num2date(times[end_index], time_units)
+					#print netCDF4.date2num(this_origin, time_units), netCDF4.date2num(this_end, time_units)
+					#print origin_index, end_index
+					#print "from file: ", netCDF4.num2date(times[origin_index], time_units), netCDF4.num2date(times[end_index], time_units)
 					
-					slices.append(slice(start_index, end_index+1))
+					slices.append(slice(start_index, end_index))
 	
 	return slices
 

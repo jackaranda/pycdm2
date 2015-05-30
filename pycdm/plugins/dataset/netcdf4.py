@@ -128,7 +128,7 @@ class netCDF4Dataset(Dataset):
 			names = [v.name for v in field.coordinates_variables]
 			coordinates_variables = coordinates_variables.union(names)
 		
-		print "coordinates variables are ", coordinates_variables
+		#print "coordinates variables are ", coordinates_variables
 
 		outfile = netCDF4.Dataset(filename, 'w')
 		outfile.set_fill_off()
@@ -137,14 +137,14 @@ class netCDF4Dataset(Dataset):
 
 		# Create the dimensions
 		for key, dim in dataset.root.dimensions.items():
-			print "creating dimension ", dim
+		#	print "creating dimension ", dim
 			outfile.createDimension(key, dim.length)
 
 		# Create and write the variables
-		print "creating and writing variables"
+		#print "creating and writing variables"
 		for name, variable in dataset.root.variables.items():
 
-			print name, variable
+		#	print name, variable
 
 			field = Field(variable)
 
@@ -163,16 +163,16 @@ class netCDF4Dataset(Dataset):
 				data_slice = [slice(None)]*len(variable.shape)
 				data_slice[field.time_dim] = slice(time_select[0], time_select[-1])
 				data_slice = tuple(data_slice)
-				print data_slice
+		#		print data_slice
 
 				variable.group.dimensions['time'] = Dimension('time', len(time_select))
 
 			if include and ((name not in include) and (name not in coordinates_variables)):
-				print "skipping because of include"
+			#	print "skipping because of include"
 				continue
 
 			if exclude and ((name in exclude) and (name not in coordinates_variables)):
-				print "skipping because of exclude"
+			#	print "skipping because of exclude"
 				continue
 
 			dims = variable.dimensions
@@ -183,7 +183,7 @@ class netCDF4Dataset(Dataset):
 			if datatype == numpy.float32:
 				datatype = 'f4'
 
-			print "creating ", name, variable, datatype, variable.dimensions, variable.attributes.items()
+			#print "creating ", name, variable, datatype, variable.dimensions, variable.attributes.items()
 
 			if '_FillValue' in variable.attributes.keys():
 				fill_value = variable.attributes['_FillValue']
@@ -192,12 +192,12 @@ class netCDF4Dataset(Dataset):
 
 			fill_value = False
 			outfile.createVariable(name, datatype, dims, fill_value=fill_value, zlib=True)
-			print "new variable has shape ", outfile.variables[name].shape
-			print "original variable has shape ", variable[:].shape
+			#print "new variable has shape ", outfile.variables[name].shape
+			#print "original variable has shape ", variable[:].shape
 
 			outfile.variables[name].setncatts(variable.attributes)
 
-			print "Assigning variable"
+			#print "Assigning variable"
 			#print outfile.variables[name][:].shape
 			#print variable[:].shape
 
