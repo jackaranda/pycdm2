@@ -28,8 +28,8 @@ class AttributeList(object):
 				
 	def __setitem__(self, key, value):
 		
-		#if type(value) is str or type(value) is unicode or type(value) is float:
-		self._attributes[key] = value
+		if type(value) is str or type(value) is unicode or type(value) is float or type(value) is int:
+			self._attributes[key] = value
 		
 	def __getitem__(self, key):
 		return self._attributes[key]

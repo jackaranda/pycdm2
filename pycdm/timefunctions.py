@@ -120,9 +120,9 @@ def time_slices(times, time_units, origin={}, length='1 month', after=None, befo
 					this_end = datetime.datetime(end_year, end_month, end_day, hour)
 					
 					# Check if are completely before or after the time range
-					if this_end < after or this_start >= before:
-						print this_start, after
-						print this_end, before
+					if this_start < after or this_end > before:
+#						print this_start, after
+#						print this_end, before
 						continue
 
 					start_value = netCDF4.date2num(this_start, time_units)
@@ -142,7 +142,7 @@ def time_slices(times, time_units, origin={}, length='1 month', after=None, befo
 					
 					#print netCDF4.date2num(this_origin, time_units), netCDF4.date2num(this_end, time_units)
 					#print origin_index, end_index
-					#print "from file: ", netCDF4.num2date(times[origin_index], time_units), netCDF4.num2date(times[end_index], time_units)
+					#print "from file: ", netCDF4.num2date(times[start_index], time_units), netCDF4.num2date(times[end_index], time_units)
 					
 					slices.append(slice(start_index, end_index))
 	

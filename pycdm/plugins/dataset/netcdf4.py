@@ -194,7 +194,6 @@ class netCDF4Dataset(Dataset):
 			outfile.createVariable(name, datatype, dims, fill_value=fill_value, zlib=True)
 			#print "new variable has shape ", outfile.variables[name].shape
 			#print "original variable has shape ", variable[:].shape
-
 			outfile.variables[name].setncatts(variable.attributes)
 
 			#print "Assigning variable"
