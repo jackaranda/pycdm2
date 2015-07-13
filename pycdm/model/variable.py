@@ -55,19 +55,10 @@ class Variable(object):
 		# already defined in the parent group
 		self.dimensions = []
 		for dimension in dimensions:
+			
 			# See if we have a Dimension instance
 			if type(dimension) is Dimension:
-				
-				# If the variable has a group then check if the dimension is in the group
-				# in which case we reference the existing dimension by name
-				if self.group:
-					
-					if self.group.has_dimension(dimension):
-						self.dimensions.append(dimension.name)
-				
-				# If we don't have a group then we retain the full dimension instance
-				else:
-					self.dimensions.append(dimension)
+				self.dimensions.append(dimension)
 				
 			# else we might have a dimension name as a unicode instance
 			elif type(dimension) is unicode:

@@ -14,6 +14,8 @@ from error import CDMError
 
 from ..timefunctions import time_slices, time_aggregation
 
+# This and the cf_units2coordinates function needs to be replaced with 
+# a more general cf standards mapping function
 cf_dimensions = {'degree_east': 'longitude',
 'degree east': 'longitude',
 'degrees_east': 'longitude',
@@ -40,7 +42,7 @@ def cf_units2coordinates(units):
 class Field(object):
 	"""
 	The Field class encapsulates a Variable instance along with its coordinate system
-	mapping.  Coordinate system mapping at the moment is based on teh COORDS/CF 
+	mapping.  Coordinate system mapping at the moment is based on the COORDS/CF 
 	conventions
 	"""
 	
@@ -51,15 +53,17 @@ class Field(object):
 		The Variable instance needs to be part of a Group instance in order to gain access
 		to other related variables and dimensions that are required for the coordinates
 		mapping
-		
-		A Field can actually have multiple variables associated with it.  While it is 
-		initialised with a single variable, new variables can be added.  When a variable
-		is added it is checked to make sure that the coordinates mapping is identical.
 		"""
-		#print 'generating field for ', variable, variable.dimensions
-		self.variables = [variable]
 		
+		self.variable = variable
+		self.group = variable.group
+		
+		# A field holds a list of its coordinates variables, ie. variables that describe
+		# the values assocated with all its dimensions
 		self.coordinates_variables = []
+
+		# The coordinates mapping dictionary maps between coordinates and coordinates variables
+		# and their dimension mappings
 		self.coordinates_mapping = {}
 		
 		# Cache features and times
@@ -72,11 +76,9 @@ class Field(object):
 		# First lets check for standard 1D coordinate variables.  These are variables
 		# that have the same name as one of the variables dimensions or 1D variables
 		# sharing a dimension with the variable 
-		#print self.variables[0].group.variables.keys()
 		for di in range (0,len(self.variables[0].dimensions)):
 
 			dimension = self.variables[0].dimensions[di]
-			#print "Field.__init__  looking at dimension ", dimension
 
 			if isinstance(dimension, Dimension):
 				dim_name = dimension.name
