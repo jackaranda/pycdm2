@@ -5,6 +5,7 @@ import numpy
 import calendar
 import datetime
 import json
+import shapely
 
 import netCDF4
 
@@ -18,7 +19,8 @@ cf_dimensions = {'degree_east': 'longitude',
 'degrees_east': 'longitude',
 'degree_north': 'latitude',
 'degrees_north': 'latitude',
-'degree north': 'latitude'}
+'degree north': 'latitude',
+'millibars':'level'}
 
 def cf_units2coordinates(units):
 	
@@ -60,9 +62,10 @@ class Field(object):
 		self.coordinates_variables = []
 		self.coordinates_mapping = {}
 		
-		# Cache features
+		# Cache features and times
 		self._features = None
-		
+		self._realtimes = None
+
 		# We need to keep track of which dimensions we can map
 		mapped = []
 		
@@ -169,7 +172,25 @@ class Field(object):
 			self.longitude_variable = self.variables[0].group.variables[self.coordinates_mapping['longitude']['variable']]
 		except:
 			self.longitude_variable = None
+
+		try:
+			self.level_variable = self.variables[0].group.variables[self.coordinates_mapping['level']['variable']]
+			self.level_dim = self.coordinates_mapping['level']['map'][0]
+		except:
+			self.level_variable = None
+
+		# The current subset slices:
+		self._subset = []
+		for dim in self.variables[0].dimensions:
+
+			if isinstance(dim, Dimension):
+				dim_name = dim.name
+			else:
+				dim_name = dim
 			
+			self._subset.append(slice(0,self.variables[0].group.dimensions[dim_name].length))
+
+
 		
 	def add_variable(self, variable):
 		"""
@@ -241,14 +262,26 @@ class Field(object):
 		
 		# First check we have a grid feature type
 		if self.featuretype in ['Grid', 'GridSeries']:
-			
+
 			latvar = self.latitude_variable
 			lonvar = self.longitude_variable
+
+			latdims = self.coordinates_mapping['latitude']['map']
+			londims = self.coordinates_mapping['longitude']['map']
+
+			# Create latitude and longitude subset slices from the field subset slices
+			lat_subset = []
+			for dim in latdims:
+				lat_subset.append(self._subset[dim])
 			
+			lon_subset = []
+			for dim in londims:
+				lon_subset.append(self._subset[dim])
+
 			# Then check if latitude and longitude variables are 1D
 			if len(latvar.shape) == 1 and len(lonvar.shape) == 1:
-				latvar_2d = latvar[:].reshape((-1,1)).repeat(lonvar.shape[0], axis=1)
-				lonvar_2d = lonvar[:].reshape((-1,1)).transpose().repeat(latvar.shape[0], axis=0)
+				latvar_2d = latvar[lat_subset].reshape((-1,1)).repeat(lonvar.shape[0], axis=1)
+				lonvar_2d = lonvar[lon_subset].reshape((-1,1)).transpose().repeat(latvar.shape[0], axis=0)
 				return (latvar_2d, lonvar_2d)
 			
 			# for 2D variables its easy, just return the variable data
@@ -256,9 +289,9 @@ class Field(object):
 				
 				# Handle the WRF case where lat/lon variables are 3D with time as first dimension
 				if len(latvar.shape) == 3 and len(lonvar.shape) == 3:
-					return (latvar[0,:], lonvar[0,:])
+					return (latvar[0,lat_subset], lonvar[0,lon_subset])
 				else:
-					return (latvar[:], lonvar[:])
+					return (latvar[lat_subset], lonvar[lon_subset])
 			
 			# otherwise, we can't do it!
 			else:
@@ -482,7 +515,7 @@ class Field(object):
 			# For float targets and coordinate variables
 			#print "targets: ", targets
 			for target in targets:
-				if type(target) == numpy.float32 or type(target) == float:
+				if type(target) in [numpy.float32, numpy.float64, float]:
 					# Intialiase our distance array
 					d2 = numpy.zeros(shape)					
 					for k in range(0,len(map_keys)):
@@ -511,20 +544,68 @@ class Field(object):
 	def times(self):
 		
 		if self.time_variable:
-			return self.time_variable[:]
+			return self.time_variable[self._subset[self.time_dim]][:]
 		else:
 			return []
 			
 	@property
 	def realtimes(self):
-		
-		if self.time_variable:
-			return netCDF4.num2date(self.time_variable[:], self.time_variable.get_attribute('units'))
+		if type(self._realtimes) != list:
+			if self.time_variable:
+				self._realtimes = netCDF4.num2date(self.times, self.time_variable.get_attribute('units'))
+				return self._realtimes
+		else:
+			return self._realtimes
 			
 	def time_slices(self, start={}, length='1 month', after=None, before=None):
 		
 		return time_slices(self.times, self.time_variable.get_attribute('units'), start, length, after=after, before=before)
+
+
+	def subset(self, **kwargs):
+
+		for arg, value in kwargs.items():
+
+			# Reverse map each argument
+			if type(value) == tuple:
+				start = [s.start for s in self.reversemap(**{arg: value[0]})]
+				stop = [s.stop for s in self.reversemap(**{arg: value[1]})]
+			else:
+				start = [s.start for s in self.reversemap(**{arg: value})]
+				stop = [s.stop for s in self.reversemap(**{arg: value})]
+
+			# Modify the field _subset slices for each dimension
+			for i in range(0, len(start)):
+
+				# Swap around if start less than stop
+				if start[i] > stop[i]:
+					tmp = stop[i]
+					stop[i] = start[i] + 1
+					start[i] = tmp - 1
+				
+				if start[i] and start[i] > self._subset[i].start:
+					newstart = start[i]
+				else:
+					newstart = self._subset[i].start
+
+				if stop[i] and stop[i] < self._subset[i].stop:
+					newstop = stop[i]
+				else:
+					newstop = self._subset[i].stop
+
+				self._subset[i] = slice(newstart, newstop)
+
+
+	def __getitem__(self, slices):
+
+		result = []
+		for variable in self.variables:
+			result.append(variable[self._subset][slices])
 		
+		return result
+
+
+
 	def time_aggregation(self, func, start={}, length='1 month', mask_less=numpy.nan, mask_greater=numpy.nan):
 		
 		times = self.times
@@ -609,9 +690,9 @@ class Field(object):
 			# How do we slice the data to get grid point values?
 			index = 0
 			for dim_name in self.variables[0].dimensions:
-				print dim_name
+				#print dim_name
 				dim = self.variables[0].group.get_dimension(dim_name)
-				print dim
+				#print dim
 				if dim.length == shape[0]:
 					y_index = index
 				if dim.length == shape[1]:
@@ -687,7 +768,7 @@ class Field(object):
 			# Now create all polygons
 			for y in range(0, shape[0]):
 				for x in range(0, shape[1]):
-					
+
 					# Configure the slices
 					slices[x_index] = slice(x,x+1)
 					slices[y_index] = slice(y,y+1)
@@ -712,8 +793,7 @@ class Field(object):
 						feature = {'type': 'Feature', 'properties':{'id':x + y * shape[1]}, 'geometry': {'type': 'Polygon', 'coordinates': [vertices]}}
 						
 						# Now add the data					
-						data = self.variables[0][slices].flatten()
-						
+						#data = self.variables[0][slices].flatten()
 						
 						# If we have property names then extract data for each name
 						if propnames:
@@ -725,7 +805,8 @@ class Field(object):
 						
 						# else just set property 'value' to the first value of the flattened data array
 						else:
-								feature['properties']['value'] = float(self.variables[0][slices].flatten()[1])
+								pass
+								#feature['properties']['value'] = float(self.variables[0][slices].flatten()[1])
 						
 						#print feature['properties']
 						#, 'value':float(values[y,x])
