@@ -71,11 +71,10 @@ class Variable(object):
 				# otherwise we raise an exception
 				else:
 					if self.group.has_dimension(dimension):
-						self.dimensions.append(dimension)
+						self.dimensions.append(self.group.get_dimension(dimension))
 					else:
 						raise CDMError('Named dimension {} not found in group dimensions'.format(dimension))
-						
-
+			
 			
 	def __repr__(self):
 	

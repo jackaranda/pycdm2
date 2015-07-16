@@ -70,27 +70,56 @@ class Field(object):
 		self._features = None
 		self._realtimes = None
 
+		# Build the coordinated mapping dict
+		self.build_coordinates_map()
+
+		# Initialise the current subset to the default subset
+		self._subset = self.default_subset()
+
+
+	def default_subset(self):
+		"""
+		Construct a list of slices instances representing the full variable domain
+		"""
+		return [slice(0,dim.length) for dim in self.variable.dimensions]
+
+
+	def build_coordinates_map(self):
+		"""
+		Construct the coordinates mapping dictionary.  The coordinates mapping dictionary provides
+		a map from standard coordinates (time, latitude, longitude, level, etc...) to coordinate
+		variables as well as the dimensions mapping from the fields variable dimensions to the 
+		coordinate variables dimensions.  An example mapping for a variable defined as such:
+
+		float q(time, levelist, latitude, longitude)
+
+		And a latitude variable defined as:
+
+		float lat(latitude, longitude)
+
+		would look like:
+
+		"latitude":{"variable":"lat", "map":[2,3]}
+
+		Which tells us that latitude values are held in the "lat" variable and that the third and
+		fourth ([2,3] zero based indexing) dimensions of the fields variable are used to map into 
+		the lat variable.
+		"""
 		# We need to keep track of which dimensions we can map
 		mapped = []
 		
 		# First lets check for standard 1D coordinate variables.  These are variables
 		# that have the same name as one of the variables dimensions or 1D variables
 		# sharing a dimension with the variable 
-		for di in range (0,len(self.variables[0].dimensions)):
+		for di in range (0,len(self.variable.dimensions)):
 
-			dimension = self.variables[0].dimensions[di]
+			dimension = self.variable.dimensions[di]
+			dim_name = dimension.name
 
-			if isinstance(dimension, Dimension):
-				dim_name = dimension.name
-			else:
-				dim_name = dimension
-			
-
-			#print "Field.__init__  searching for coordinate variable: ", self.variables[0].group.variables.keys()
 			# Find variables with same name as the dimension
-			if dim_name in self.variables[0].group.variables.keys():
+			if dim_name in self.variable.group.variables.keys():
 
-				coord_variable = self.variables[0].group.variables[dim_name]
+				coord_variable = self.variable.group.variables[dim_name]
 				self.coordinates_variables.append(coord_variable)
 				mapped.append(dim_name)
 				
@@ -102,48 +131,25 @@ class Field(object):
 				if not coordinate_name:
 					coordinate_name = dim_name
 				
-				self.coordinates_mapping[coordinate_name] = {'variable':dim_name, 'map':[di]}
-			
-			# If previous failed then try find 1D "loose" coordinate variables
-			#else:
-			#	for name, variable in self.variables[0].group.variables.items():
-			#		#print 'checking ', variable
-			#		# Must be 1D
-			#		if len(variable.dimensions) == 1:
-			#			
-			#			# Must use the same dimension
-			#			if (dim_name in variable.dimensions):
-			#				self.coordinates_variables.append(variable)
-			#				mapped.append(dim_name)
-			#				
-			#				# See if we can use the units to find out what spatial/temporal variable this is from 
-			#				# the CF conventions
-			#				coordinate_name = cf_units2coordinates(variable.get_attribute('units'))
-			#
-			#				# If we can't we just default to the dimension name
-			#				if not coordinate_name:
-			#					coordinate_name = dim_name
-			#	
-			#				self.coordinates_mapping[coordinate_name] = {'variable':dim_name, 'map':[di]}
-			
+				self.coordinates_mapping[coordinate_name] = {'variable':dim_name, 'map':[di]}			
 				
-		# Next lets see if we have a coordinates attribute we can use (CF1.6 convention)
-		if self.variables[0].get_attribute('coordinates'):
+		# Next lets see if we have a "coordinates" attribute we can use (CF convention)
+		if self.variable.get_attribute('coordinates'):
 			
-			self.coordinates_names = self.variables[0].get_attribute('coordinates').split()
+			self.coordinates_names = self.variable.get_attribute('coordinates').split()
 						
 			# Find each associated variable
 			for name in self.coordinates_names:
 				
-				if name in self.variables[0].group.variables.keys():
+				if name in self.variable.group.variables.keys():
 					
-					coord_variable = self.variables[0].group.variables[name]
+					coord_variable = self.variable.group.variables[name]
 					self.coordinates_variables.append(coord_variable)
 
 					#print 'got coordinate variable ', coord_variable, coord_variable.dimensions
 					# See if we can find out what spatial/temporal variable this is
 					try:
-						coordinate_name = cf_dimensions[self.variables[0].group.variables[name].get_attribute('units')]
+						coordinate_name = cf_dimensions[self.variable.group.variables[name].get_attribute('units')]
 					except:
 						coordinate_name = name
 
@@ -154,65 +160,45 @@ class Field(object):
 					#print 'generating dimensions map for ', coord_variable.dimensions
 					for dimension in coord_variable.dimensions:
 						#print dimension, coord_variable.dimensions
-						self.coordinates_mapping[coordinate_name]['map'].append(self.variables[0].dimensions.index(dimension))
+						self.coordinates_mapping[coordinate_name]['map'].append(self.variable.dimensions.index(dimension))
 						if not dimension in mapped:
 							mapped.append(dimension)
 							
 		# Setup shortcut to identify time coordinate variable
 		try:
-			self.time_variable = self.variables[0].group.variables[self.coordinates_mapping['time']['variable']]
+			self.time_variable = self.variable.group.variables[self.coordinates_mapping['time']['variable']]
+			self.time_dim = self.coordinates_mapping['time']['map'][0]
 		except:
 			self.time_variable = None
+			self.time_dim = None
 			
 		# Shortcuts for latitude and longitude coordinate variables
 		try:
-			self.latitude_variable = self.variables[0].group.variables[self.coordinates_mapping['latitude']['variable']]
+			self.latitude_variable = self.variable.group.variables[self.coordinates_mapping['latitude']['variable']]
 		except:
 			self.latitude_variable = None
 
 		try:
-			self.longitude_variable = self.variables[0].group.variables[self.coordinates_mapping['longitude']['variable']]
+			self.longitude_variable = self.variable.group.variables[self.coordinates_mapping['longitude']['variable']]
 		except:
 			self.longitude_variable = None
 
 		try:
-			self.level_variable = self.variables[0].group.variables[self.coordinates_mapping['level']['variable']]
+			self.level_variable = self.variable.group.variables[self.coordinates_mapping['level']['variable']]
 			self.level_dim = self.coordinates_mapping['level']['map'][0]
 		except:
 			self.level_variable = None
+			self.level_dim = None
 
-		# The current subset slices:
-		self._subset = []
-		for dim in self.variables[0].dimensions:
-
-			if isinstance(dim, Dimension):
-				dim_name = dim.name
-			else:
-				dim_name = dim
-			
-			self._subset.append(slice(0,self.variables[0].group.dimensions[dim_name].length))
-
-
-		
-	def add_variable(self, variable):
-		"""
-		Add a variable to this field.  This requires that the coordinates_mapping of 
-		the new variable is exactly the same as the coordinates mapping of this field.
-		"""
-		
-		new_field = Field(variable)
-		
-		if new_field.coordinates_mapping == self.coordinates_mapping:
-			self.variables.append(variable)
-			return True
-		else:
-			return False
-		
 		
 	@property
 	def shape(self):
-		return self.variables[0].shape
-		
+		"""
+		Returns the shape of the current subset
+		"""
+		return tuple([s.stop-s.start-1 for s in self._subset])
+
+
 	@property
 	def featuretype(self):
 		"""
@@ -319,14 +305,9 @@ class Field(object):
 		if not type(indices) == tuple:
 			indices = tuple((indices,))
 
-		# Check we have the same number of indices in the argument as in the mapping
-		#if len(indices) != len(self.coordinates_mapping):
-		#	raise CDMError("Field is %d dimensional, %d indices provided" % (len(self.coordinates_mapping), len(indices)))
-
 		coordinates = {}
-		
 		for coordinate in self.coordinates_mapping.keys():
-			coordinate_variable = self.variables[0].group.variables[self.coordinates_mapping[coordinate]['variable']]
+			coordinate_variable = self.variable.group.variables[self.coordinates_mapping[coordinate]['variable']]
 			coordinate_mapping = self.coordinates_mapping[coordinate]['map']
 			
 
@@ -424,7 +405,7 @@ class Field(object):
 		kwargs_filtered = {key: value for key, value in kwargs.items() if value not in restricted}
 		
 		# We need to find each dimension index in order
-		for dim_index in range(len(self.variables[0].dimensions)):
+		for dim_index in range(len(self.variable.dimensions)):
 			
 			#print "indices: ", indices
 			#print "dim_index: ", dim_index
@@ -455,7 +436,7 @@ class Field(object):
 			first = True
 			shape = None
 			for map_key in map_keys:
-				coord_variable = self.variables[0].group.variables[self.coordinates_mapping[map_key]['variable']]
+				coord_variable = self.variable.group.variables[self.coordinates_mapping[map_key]['variable']]
 				#print coord_variable.shape
 				if first:
 					shape = coord_variable.shape
@@ -472,8 +453,8 @@ class Field(object):
 			# Find the associated coordinate variables			
 			coordinate_variables = []
 			for key in map_keys:
-			#	print "adding coordinate variable: ", self.variables[0].group.variables[self.coordinates_mapping[key]['variable']]
-				coordinate_variables.append(self.variables[0].group.variables[self.coordinates_mapping[key]['variable']])
+			#	print "adding coordinate variable: ", self.variable.group.variables[self.coordinates_mapping[key]['variable']]
+				coordinate_variables.append(self.variable.group.variables[self.coordinates_mapping[key]['variable']])
 				
 			#print 'reversemap: coordinate_variables(dim_index=%d) = ' % (dim_index), coordinate_variables
 			
@@ -492,7 +473,7 @@ class Field(object):
 				# Check if we have a datetime argument, convert to dataset time coordinate
 				if type(arg) == datetime.datetime:
 					try:
-						timevar = self.variables[0].group.variables[self.coordinates_mapping['time']['variable']]
+						timevar = self.variable.group.variables[self.coordinates_mapping['time']['variable']]
 						timeunits = timevar.get_attribute('units')
 						calendar = timevar.get_attribute('calendar')
 						if not calendar:
@@ -538,10 +519,6 @@ class Field(object):
 		
 		return tuple(slice_list)
 		
-	@property
-	def time_dim(self):
-		return self.coordinates_mapping['time']['map'][0]
-
 	@property
 	def times(self):
 		
@@ -599,13 +576,8 @@ class Field(object):
 
 
 	def __getitem__(self, slices):
-
-		result = []
-		for variable in self.variables:
-			result.append(variable[self._subset][slices])
+		return self.variable[self._subset][slices]
 		
-		return result
-
 
 
 	def time_aggregation(self, func, start={}, length='1 month', mask_less=numpy.nan, mask_greater=numpy.nan):
@@ -621,7 +593,7 @@ class Field(object):
 		new_shape[time_dim] = len(slices)
 		new_shape = tuple(new_shape)
 		
-		source = self.variables[0][:]
+		source = self.variable[:]
 		result = numpy.ma.empty(new_shape, dtype=numpy.float32)
 
 		result_selection = []
@@ -634,9 +606,9 @@ class Field(object):
 			source_selection[time_dim] = slices[i]
 			result_selection[time_dim] = i
 			#print source_selection, result_selection
-			#print self.variables[0][source_selection].shape
+			#print self.variable[source_selection].shape
 			
-	#		tmp = numpy.ma.masked_array(self.variables[0][source_selection])
+	#		tmp = numpy.ma.masked_array(self.variable[source_selection])
 			tmp = source[source_selection]
 			#print type(tmp)
 			#print numpy.ma.min(tmp), numpy.ma.max(tmp)
@@ -691,10 +663,8 @@ class Field(object):
 			
 			# How do we slice the data to get grid point values?
 			index = 0
-			for dim_name in self.variables[0].dimensions:
-				#print dim_name
-				dim = self.variables[0].group.get_dimension(dim_name)
-				#print dim
+			for dim in self.variable.dimensions:
+				print dim, dim.length, len(self.times)
 				if dim.length == shape[0]:
 					y_index = index
 				if dim.length == shape[1]:
@@ -705,7 +675,7 @@ class Field(object):
 			
 			
 			# Create the initial slices with indices defaulting to 0
-			slices = [0]*len(self.variables[0].dimensions)
+			slices = [0]*len(self.variable.dimensions)
 			slices[t_index] = slice(0,len(self.times))
 
 						
@@ -795,20 +765,20 @@ class Field(object):
 						feature = {'type': 'Feature', 'properties':{'id':x + y * shape[1]}, 'geometry': {'type': 'Polygon', 'coordinates': [vertices]}}
 						
 						# Now add the data					
-						#data = self.variables[0][slices].flatten()
+						#data = self.variable[slices].flatten()
 						
 						# If we have property names then extract data for each name
 						if propnames:
 							for name in propnames:
 								
-								feature['properties']['value'] = self.variables[0][slices].flatten()[1]
-	#							print self.variables[0][slices]
-								#feature['properties']['value'] = self.variables[0][slices].flatten()[propnames.index(name)]
+								feature['properties']['value'] = self.variable[slices].flatten()[1]
+	#							print self.variable[slices]
+								#feature['properties']['value'] = self.variable[slices].flatten()[propnames.index(name)]
 						
 						# else just set property 'value' to the first value of the flattened data array
 						else:
 								pass
-								#feature['properties']['value'] = float(self.variables[0][slices].flatten()[1])
+								#feature['properties']['value'] = float(self.variable[slices].flatten()[1])
 						
 						#print feature['properties']
 						#, 'value':float(values[y,x])
@@ -836,9 +806,9 @@ class Field(object):
 
 				# Add related variables to properties
 				for key in self.coordinates_mapping:
-					if key in self.variables[0].group.variables and key not in ['latitude', 'longitude']:
+					if key in self.variable.group.variables and key not in ['latitude', 'longitude']:
 						if self.coordinates_mapping[key]['map'] == self.coordinates_mapping['latitude']['map']:
-							feature['properties'][key] = self.variables[0].group.variables[key][fid]
+							feature['properties'][key] = self.variable.group.variables[key][fid]
 							
 				features.append(feature)
 				

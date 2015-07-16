@@ -83,7 +83,6 @@ class netCDF4Dataset(Dataset):
 		>>> print ds.root.variables['tasmax'].dimensions
 		[u'time', u'm2', u'iy', u'jx']
 		"""
-		
 		# Call the super constructor
 		super(netCDF4Dataset, self).__init__(name=name, uri=uri)
 		
