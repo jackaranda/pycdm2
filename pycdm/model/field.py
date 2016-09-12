@@ -22,7 +22,8 @@ cf_dimensions = {'degree_east': 'longitude',
 'degree_north': 'latitude',
 'degrees_north': 'latitude',
 'degree north': 'latitude',
-'millibars':'level'}
+'millibars':'level',
+'Pa':'level'}
 
 def cf_units2coordinates(units):
 	
@@ -75,6 +76,7 @@ class Field(object):
 
 		# Initialise the current subset to the default subset
 		self._subset = self.default_subset()
+		#self._subset = False
 
 
 	def default_subset(self):
@@ -161,8 +163,8 @@ class Field(object):
 					for dimension in coord_variable.dimensions:
 						#print dimension, coord_variable.dimensions
 						self.coordinates_mapping[coordinate_name]['map'].append(self.variable.dimensions.index(dimension))
-						if not dimension in mapped:
-							mapped.append(dimension)
+						if not dimension.name in mapped:
+							mapped.append(dimension.name)
 							
 		# Setup shortcut to identify time coordinate variable
 		try:
@@ -196,7 +198,8 @@ class Field(object):
 		"""
 		Returns the shape of the current subset
 		"""
-		return tuple([s.stop-s.start-1 for s in self._subset])
+		return self.variable.shape
+		#return tuple([s.stop-s.start-1 for s in self._subset])
 
 
 	@property
@@ -523,7 +526,10 @@ class Field(object):
 	def times(self):
 		
 		if self.time_variable:
-			return self.time_variable[self._subset[self.time_dim]][:]
+			if self._subset:
+				return self.time_variable[self._subset[self.time_dim]][:]
+			else:
+				return self.time_variable[:]
 		else:
 			return []
 			
@@ -543,6 +549,7 @@ class Field(object):
 
 	def subset(self, **kwargs):
 
+		#print "_subset = ", self._subset
 		for arg, value in kwargs.items():
 
 			# Reverse map each argument
@@ -555,7 +562,7 @@ class Field(object):
 
 			# Modify the field _subset slices for each dimension
 			for i in range(0, len(start)):
-
+				#print "subset: ", i, start[i], stop[i]
 				# Swap around if start less than stop
 				if start[i] > stop[i]:
 					tmp = stop[i]
@@ -573,10 +580,17 @@ class Field(object):
 					newstop = self._subset[i].stop
 
 				self._subset[i] = slice(newstart, newstop)
+		#print "_subset = ", self._subset
 
 
 	def __getitem__(self, slices):
-		return self.variable[self._subset][slices]
+#		print "__getitem__", slices
+#		print self._subset
+#		print self.variable[self._subset][slices].shape
+		if self._subset:
+			return self.variable[tuple(self._subset)][slices]
+		else:
+			return self.variable[slices]
 		
 
 
